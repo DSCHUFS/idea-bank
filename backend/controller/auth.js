@@ -34,19 +34,21 @@ exports.signinAPI = async(req, res) => {
     try {
         const { email, password } = req.body
         let result = await res.pool.query(EMAIL_EXIST, [email])
+        let {user_id, user_password} = result[0][0]
+        
         let email_check = (result[0].length > 0)
         if(!email_check) {
             res.status(400).json({'msg' : 'signin failed'})
         } else {
-            let c_password = await comparePW(password, result[0][0].user_password)
-            console.log(`c_password : ${c_password}`)
+            let c_password = await comparePW(password, user_password)
             if(!c_password) {
                 res.status(400).json({'msg' : 'signin failed'})
             } else {
-                res.status(200).json({'msg' : 'signin success'})
+                let token = await issueToken(user_id)
+                if(!token) throw e
+                res.status(200).json({'msg' : 'signin success', 'token' : token})
             }
         }
-        
     } catch(e) {
         console.log(`signin e : ${e}`)
         res.status(400).json({'msg' : 'signin error'})
