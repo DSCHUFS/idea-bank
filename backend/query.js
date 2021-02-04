@@ -20,3 +20,11 @@ exports.SELECT_IDEA_DETAIL = `SELECT idea_id, idea_title, idea_detail, idea_pric
 exports.UPDATE_GRADE = `UPDATE BuyIdeas SET idea_grade = ? WHERE idea_id = ? AND user_id = ?;`
 exports.SELECT_WRITER_INFO = `SELECT Users.user_id, user_grade FROM Ideas JOIN Users ON Ideas.idea_id = ? AND Ideas.user_id = Users.user_id;`
 exports.UPDATE_USER_GRADE = `UPDATE Users SET user_grade = ? WHERE user_id = ?`
+
+// mypage
+exports.SELECT_BASIC_INFO = `SELECT user_email, user_nickname, user_point, user_grade FROM Users WHERE user_id = ?;`
+exports.SELECT_BASIC_PICK_INFO = `SELECT idea_id, pick_at FROM PickIdeas WHERE user_id = ? ORDER BY pick_at DESC;`
+exports.SELECT_DETAIL_PICK_INFO = `SELECT idea_title, idea_price, idea_category, user_nickname, user_grade FROM Ideas JOIN Users ON Users.user_id = Ideas.user_id AND idea_id = ?;`
+exports.SELECT_BASIC_BUY_INFO = `SELECT idea_id, buy_at, idea_grade From BuyIdeas WHERE user_id = ? ORDER BY buy_at DESC;`
+exports.SELECT_DETAIL_BUY_INFO = `SELECT idea_title, idea_detail, idea_price, idea_category, user_nickname, user_grade FROM Ideas JOIN Users ON Users.user_id = Ideas.user_id AND idea_id = ?;`
+exports.SELECT_REGISTER_INFO = `SELECT idea_id, idea_title, idea_detail, idea_price From Ideas WHERE user_id = ?;`
