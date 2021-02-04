@@ -1,2 +1,2 @@
 # idea-bank
-### [📄 endpoint 정리](https://app.gitbook.com/@ujin2021/s/ideabank/, "endpoint")
+### [📄 endpoint 정리](https://app.gitbook.com/@ujin2021/s/ideabank/)
