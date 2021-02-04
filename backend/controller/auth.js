@@ -1,6 +1,5 @@
 const { EMAIL_EXIST, INSERT_USER } = require('../query')
 const { bcryptPW, comparePW, issueToken } = require('../lib')
-const e = require('express')
 
 exports.signupAPI = async(req, res) => {
     const conn = await res.pool.getConnection()
