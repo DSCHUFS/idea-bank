@@ -9,11 +9,15 @@ const NotFoundRoot = styled.div`
   height: 100vh;
 `;
 
-export default function NotFound() {
+export default function NotFound(props) {
+  console.log(props);
   return (
     <NotFoundRoot>
       <h1>Not Found</h1>
       <Link to="/">👉 Back to home</Link>
+      <div>
+        {props.location.state !== undefined ? props.location.state.title : null}
+      </div>
     </NotFoundRoot>
   );
 }
