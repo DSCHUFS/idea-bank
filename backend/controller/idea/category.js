@@ -16,7 +16,7 @@ exports.categoryAPI = async(req, res) => {
         const user_id = res.user_id
 
         // ideas table에서 category에 해당하는 idea_id 가져오기
-        let idea_ids = await conn.query(SELECT_IDEA_IDS, [category])
+        let idea_ids = await conn.query(SELECT_IDEA_IDS, [category, user_id])
         idea_ids = await exportsValue(idea_ids[0], 'idea_id') // 일단은 해당 카테고리에 대한 아이디어가 많다고 가정
 
         // 사용자가 오늘 뽑은 idea_id 는 빼기
@@ -24,8 +24,11 @@ exports.categoryAPI = async(req, res) => {
         let pick_history = await conn.query(SELECT_PICK_HISTORY, [user_id, today])
         pick_history = await exportsValue(pick_history[0], 'idea_id')
 
+        if(pick_history) {
+            idea_ids = await minusArray(idea_ids, pick_history) // 오늘 뽑은것 제외
+        }
+
         // 남은 idea_id중 random으로 하나 뽑기
-        idea_ids = await minusArray(idea_ids, pick_history) // 오늘 뽑은것 제외
         const idea_id = idea_ids[await getRandomNo(idea_ids.length)] // false일 때 err나는지 확인
 
         if(!today || !idea_ids) throw e
@@ -45,7 +48,7 @@ exports.categoryAPI = async(req, res) => {
         await conn.query(INSERT_PICK_HISTORY, [user_id, idea_id, today])
         // 해당 idea_id에 해당하는 정보 보내주기
         console.log(`lot idea success`)
-        res.status(200).json({'msg': 'idea short info', idea_title, idea_price, user_nickname, user_grade})
+        res.status(200).json({'msg': 'idea short info', idea_id, idea_title, idea_price, user_nickname, user_grade})
         await conn.commit()
     } catch(e) {
         await conn.rollback()

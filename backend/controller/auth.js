@@ -45,6 +45,7 @@ exports.signinAPI = async(req, res) => {
             } else {
                 let token = await issueToken(user_id)
                 if(!token) throw e
+                console.log(`${email} signin success`) // 지우기
                 res.status(200).json({'msg' : 'signin success', 'token' : token})
             }
         }
