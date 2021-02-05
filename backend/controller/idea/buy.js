@@ -1,4 +1,10 @@
-const { INSERT_BUY_HISTORY, SELECT_IDEA_DETAIL, UPDATE_GRADE, SELECT_WRITER_INFO } = require('../../query')
+const { 
+    INSERT_BUY_HISTORY, 
+    SELECT_IDEA_DETAIL, 
+    UPDATE_GRADE, 
+    SELECT_WRITER_INFO, 
+    UPDATE_USER_POINT_BUY 
+} = require('../../query')
 const { getToday } = require('../../lib')
 exports.buyAPI = async(req, res) => {
     const conn = await res.pool.getConnection()
@@ -13,7 +19,9 @@ exports.buyAPI = async(req, res) => {
         // 해당 idea detail, 작성자정보 갖고오기
         let info = await conn.query(SELECT_IDEA_DETAIL, [idea_id])
         const idea_info = {... info[0][0]}
-
+        let idea_price = idea_info.idea_price
+        await conn.query(UPDATE_USER_POINT_BUY, [idea_price, user_id])
+        console.log('buy success') //지우기
         res.status(200).json({'msg' : 'idea buy success', 'idea_info': idea_info})
         await conn.commit()
     } catch(e) {
