@@ -1,39 +1,36 @@
-import { Link, Redirect } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../api/contextAPI";
+import { Redirect } from "react-router";
 
-const IdeaCardRoot = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
+const IdeaContainerRoot = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
-const DetailLink = styled.div`
-  color: inherit;
-  font-size: 1.2rem;
+const PurchaseButton = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   transition: 0.3s;
-
+  cursor: pointer;
   &:hover {
-    color: red;
-    font-weight: bold;
+    color: yellowgreen;
   }
 `;
 
-export default function IdeaCard({ id, title, price, author, category }) {
+export default function IdeaContainer({ id, title, detail, price }) {
   const authContext = useContext(AuthContext);
   const [buy, setBuy] = useState(false);
   const [ideaInfo, setIdeaInfo] = useState();
 
-  const handlePurchase = (e) => {
-    e.preventDefault();
+  const handlePurchase = () => {
     if (price > authContext.point) {
       alert("포인트가 모자랍니다.");
       return;
     }
     if (window.confirm(`${price}포인트를 사용하여 구입하시겠습니까?`)) {
-      console.log(id);
       var data = JSON.stringify({
         idea_id: id,
       });
@@ -60,19 +57,16 @@ export default function IdeaCard({ id, title, price, author, category }) {
     }
   };
 
-  console.log(buy);
-  console.log(ideaInfo);
   if (buy && ideaInfo !== undefined) {
-    console.log("redirect to idea");
+    console.log(ideaInfo);
     return (
       <Redirect
         to={{
           pathname: "/idea",
           state: {
-            id: ideaInfo.idea_id,
             title: ideaInfo.idea_title,
-            price: ideaInfo.idea_price,
             detail: ideaInfo.idea_detail,
+            price: ideaInfo.idea_price,
             user_nickname: ideaInfo.user_nickname,
           },
         }}
@@ -81,13 +75,15 @@ export default function IdeaCard({ id, title, price, author, category }) {
   }
 
   return (
-    <IdeaCardRoot>
-      <div>제목: {title}</div>
-      <br />
-      <div>작가: {author}</div>
-      <div>가격: {price}포인트</div>
-      <br />
-      <DetailLink onClick={handlePurchase}>👉 구입해서 자세히 보기</DetailLink>
-    </IdeaCardRoot>
+    <IdeaContainerRoot>
+      <hr />
+      <div>Title: {title}</div>
+      {detail !== undefined ? <div>Detail: {detail}</div> : null}
+      <div>Price: {price}</div>
+      {detail !== undefined ? null : (
+        <PurchaseButton onClick={handlePurchase}>👉 구입하기</PurchaseButton>
+      )}
+      <hr />
+    </IdeaContainerRoot>
   );
 }

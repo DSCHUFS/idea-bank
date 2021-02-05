@@ -8,10 +8,14 @@ const MenuCardRoot = styled.div`
   justify-content: center;
   align-items: center;
   margin: 20px;
-  width: 300px;
+  min-width: 300px;
   height: 480px;
-  background-color: ${(props) =>
-    props.color === undefined ? "#adffc3" : props.color};
+  font-size: 2rem;
+  background-image: ${(props) =>
+    props.color === undefined
+      ? "linear-gradient(#ffffff, #adffc3)"
+      : `linear-gradient( #ffffff, ${props.color})`};
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
 
@@ -21,10 +25,17 @@ const MenuCardRoot = styled.div`
   }
 `;
 
-export default function MenuCard({ text, link, color }) {
+const Detail = styled.div`
+  font-size: 1.3rem;
+`;
+
+export default function MenuCard({ text, detail, link, color }) {
   return (
     <Link to={`/${link}`} style={{ textDecoration: "none", color: "black" }}>
-      <MenuCardRoot color={color}>{text}</MenuCardRoot>
+      <MenuCardRoot color={color}>
+        {text}
+        <Detail>{detail}</Detail>
+      </MenuCardRoot>
     </Link>
   );
 }
