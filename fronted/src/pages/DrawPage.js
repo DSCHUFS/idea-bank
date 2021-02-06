@@ -60,7 +60,7 @@ export default function DrawPage() {
   useEffect(() => {}, [info]);
 
   const handleReducePoint = useCallback(() => {
-    console.log(info);
+    // console.log(info);
     if (info !== undefined && info.free > 0)
       setInfo({
         ...info,

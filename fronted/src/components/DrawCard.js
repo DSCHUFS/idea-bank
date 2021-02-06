@@ -56,11 +56,11 @@ export default function DrawCard({ text, category, color, handleReducePoint }) {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setIdea(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 

@@ -43,8 +43,8 @@ export default function LoginPage() {
   };
 
   const handleSubmit = () => {
-    console.log(`Email: ${emailRef.current.value}`);
-    console.log(`Password: ${passwordRef.current.value}`);
+    // console.log(`Email: ${emailRef.current.value}`);
+    // console.log(`Password: ${passwordRef.current.value}`);
 
     var data = JSON.stringify({
       email: emailRef.current.value,
@@ -69,7 +69,7 @@ export default function LoginPage() {
         authContext.setToken(response.data.token);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         alert("로그인에 실패했습니다.");
       });
   };

@@ -11,7 +11,7 @@ const NotFoundRoot = styled.div`
 `;
 
 export default function NotFound(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <NotFoundRoot>
       <h1>Not Found</h1>

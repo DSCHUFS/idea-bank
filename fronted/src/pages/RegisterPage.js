@@ -32,10 +32,10 @@ export default function RegisterPage() {
   const categoryRef = useRef();
 
   const handleSubmit = () => {
-    console.log(`Title: ${titleRef.current.value}`);
-    console.log(`Detail: ${detailRef.current.value}`);
-    console.log(`Price: ${priceRef.current.value}`);
-    console.log(`Category: ${categoryRef.current.value}`);
+    // console.log(`Title: ${titleRef.current.value}`);
+    // console.log(`Detail: ${detailRef.current.value}`);
+    // console.log(`Price: ${priceRef.current.value}`);
+    // console.log(`Category: ${categoryRef.current.value}`);
 
     if (titleRef.current.value === "") {
       alert("타이틀 입력해주세요.");
@@ -70,12 +70,12 @@ export default function RegisterPage() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setIsRegistered(true);
         alert("아이디어가 등록되었습니다.");
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
         alert("등록에 실패했습니다.");
       });
   };

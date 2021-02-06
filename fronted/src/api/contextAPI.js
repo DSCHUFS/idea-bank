@@ -31,11 +31,11 @@ const AuthContextProvider = ({ children }) => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setInfo(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }, [token]);
 

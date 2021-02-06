@@ -29,13 +29,13 @@ export default function IdeaCard({ id, title, price, author, category }) {
 
   const handlePurchase = (e) => {
     e.preventDefault();
-    console.log(info);
+    // console.log(info);
     if (price > info.basic.user_point) {
       alert("포인트가 모자랍니다.");
       return;
     }
     if (window.confirm(`${price}포인트를 사용하여 구입하시겠습니까?`)) {
-      console.log(id);
+      // console.log(id);
       var data = JSON.stringify({
         idea_id: id,
       });
@@ -52,20 +52,18 @@ export default function IdeaCard({ id, title, price, author, category }) {
 
       axios(config)
         .then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
           setBuy(true);
           setIdeaInfo(response.data.idea_info);
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   };
 
-  console.log(buy);
-  console.log(ideaInfo);
   if (buy && ideaInfo !== undefined) {
-    console.log("redirect to idea");
+    // console.log("redirect to idea");
     return (
       <Redirect
         to={{
