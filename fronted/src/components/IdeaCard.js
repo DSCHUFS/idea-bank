@@ -23,12 +23,14 @@ const DetailLink = styled.div`
 
 export default function IdeaCard({ id, title, price, author, category }) {
   const authContext = useContext(AuthContext);
+  const { info } = authContext;
   const [buy, setBuy] = useState(false);
   const [ideaInfo, setIdeaInfo] = useState();
 
   const handlePurchase = (e) => {
     e.preventDefault();
-    if (price > authContext.point) {
+    console.log(info);
+    if (price > info.basic.user_point) {
       alert("포인트가 모자랍니다.");
       return;
     }

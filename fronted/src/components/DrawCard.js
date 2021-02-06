@@ -65,7 +65,7 @@ export default function DrawCard({ text, category, color, handleReducePoint }) {
   }, []);
 
   const handleOnClick = useCallback(() => {
-    if (info.basic.user_point > 100) {
+    if (info.basic.user_point >= 100) {
       setState(true);
       if (!state) {
         getRandomIdea();
