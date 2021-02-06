@@ -53,7 +53,7 @@ export default function LoginPage() {
 
     var config = {
       method: "post",
-      url: "/auth/signin/",
+      url: "/api/auth/signin/",
       headers: {
         "Content-Type": "application/json",
       },

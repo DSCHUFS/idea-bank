@@ -44,7 +44,7 @@ export default function MyPage() {
   useEffect(() => {
     var config = {
       method: "get",
-      url: "/mypage/",
+      url: "/api/mypage/",
       headers: {
         authorization: authContext.token,
       },

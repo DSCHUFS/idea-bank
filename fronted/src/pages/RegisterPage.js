@@ -60,7 +60,7 @@ export default function RegisterPage() {
 
     var config = {
       method: "post",
-      url: "/idea/register/",
+      url: "/api/idea/register/",
       headers: {
         "Content-Type": "application/json",
         authorization: authContext.token,
