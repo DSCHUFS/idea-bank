@@ -97,9 +97,10 @@ export default function MyPage() {
             뽑은 아이디어 ({info.pick.length}개)
           </AccordionSummary>
           <IdeaListContainer>
-            {info.pick.map((e) => {
+            {info.pick.map((e, idx) => {
               return (
                 <IdeaContainer
+                  key={idx}
                   id={e.idea_id}
                   title={e.idea_title}
                   detail={e.idea_detail}
@@ -118,9 +119,10 @@ export default function MyPage() {
             구입한 아이디어 ({info.buy.length}개)
           </AccordionSummary>
           <IdeaListContainer>
-            {info.buy.map((e) => {
+            {info.buy.map((e, idx) => {
               return (
                 <IdeaContainer
+                  key={idx}
                   id={e.idea_id}
                   title={e.idea_title}
                   detail={e.idea_detail}
@@ -139,9 +141,10 @@ export default function MyPage() {
             등록한 아이디어 ({info.register.length}개)
           </AccordionSummary>
           <IdeaListContainer>
-            {info.register.map((e) => {
+            {info.register.map((e, idx) => {
               return (
                 <IdeaContainer
+                  key={idx}
                   id={e.idea_id}
                   title={e.idea_title}
                   detail={e.idea_detail}
