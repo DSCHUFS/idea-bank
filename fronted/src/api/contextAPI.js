@@ -23,7 +23,7 @@ const AuthContextProvider = ({ children }) => {
   const getProfile = useCallback(() => {
     var config = {
       method: "get",
-      url: "/mypage/",
+      url: "/api/mypage/",
       headers: {
         authorization: token,
       },

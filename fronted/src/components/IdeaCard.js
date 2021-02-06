@@ -40,7 +40,7 @@ export default function IdeaCard({ id, title, price, author, category }) {
 
       var config = {
         method: "post",
-        url: "/idea/buy/",
+        url: "/api/idea/buy/",
         headers: {
           "Content-Type": "application/json",
           authorization: authContext.token,

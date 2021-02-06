@@ -48,7 +48,7 @@ export default function DrawCard({ text, category, color, handleReducePoint }) {
   const getRandomIdea = useCallback(() => {
     const config = {
       method: "get",
-      url: `/idea/${category}`,
+      url: `/api/idea/${category}`,
       headers: {
         authorization: authContext.token,
       },

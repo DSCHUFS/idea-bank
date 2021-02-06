@@ -37,7 +37,7 @@ export default function IdeaContainer({ id, title, detail, price }) {
 
       var config = {
         method: "post",
-        url: "/idea/buy/",
+        url: "/api/idea/buy/",
         headers: {
           "Content-Type": "application/json",
           authorization: authContext.token,

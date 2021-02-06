@@ -74,7 +74,7 @@ export default function SignupPage() {
 
     var config = {
       method: "post",
-      url: "/auth/signup/",
+      url: "/api/auth/signup/",
       headers: {
         "Content-Type": "application/json",
       },
