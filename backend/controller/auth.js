@@ -1,6 +1,5 @@
 const { EMAIL_EXIST, INSERT_USER } = require('../query')
 const { bcryptPW, comparePW, issueToken } = require('../lib')
-const e = require('express')
 
 exports.signupAPI = async(req, res) => {
     const conn = await res.pool.getConnection()
@@ -46,6 +45,7 @@ exports.signinAPI = async(req, res) => {
             } else {
                 let token = await issueToken(user_id)
                 if(!token) throw e
+                console.log(`${email} signin success`) // 지우기
                 res.status(200).json({'msg' : 'signin success', 'token' : token})
             }
         }
