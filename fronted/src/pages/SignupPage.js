@@ -170,12 +170,12 @@ export default function SignupPage() {
           />
         </div>
         <InvalidPassword>
-          {isValidPassword ? null : "패스워드가 일치하지 않습니다."}
+          {isValidPassword ? null : "비밀번호가 일치하지 않습니다."}
         </InvalidPassword>
         <InvalidPassword>
           {isKorean ? (
             <div>
-              패스워드에 한글이 포함되었습니다.
+              비밀번호에 한글이 포함되었습니다.
               <br />
               영문으로 입력해주세요.
             </div>
@@ -183,7 +183,10 @@ export default function SignupPage() {
         </InvalidPassword>
         <br />
         <div>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button
+            variant={isKorean || !isValidPassword ? "disabled" : "contained"}
+            onClick={isKorean || !isValidPassword ? null : handleSubmit}
+          >
             가입하기
           </Button>
         </div>
