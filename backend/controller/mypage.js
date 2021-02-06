@@ -33,6 +33,8 @@ exports.mypageAPI = async(req, res) => {
             pick_tmp = {...pick[0][i], ...info[0]}
             pick_info.push(pick_tmp)
         }
+      //   pick_tmp = { ...pick[0][i], ...info[0] };
+      pick_tmp = { ...info[0], idea_id: pick_idea_id[i] };
 
         // user가 구입한 idea
         let buy_info = []
