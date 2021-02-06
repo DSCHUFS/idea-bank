@@ -39,25 +39,10 @@ const IdeaListContainer = styled.div`
 
 export default function MyPage() {
   const authContext = useContext(AuthContext);
-  const [info, setInfo] = useState();
+  const { getProfile, info } = authContext;
 
   useEffect(() => {
-    var config = {
-      method: "get",
-      url: "/api/mypage/",
-      headers: {
-        authorization: authContext.token,
-      },
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(response.data);
-        setInfo(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    getProfile();
   }, []);
 
   const handleOnClickLogout = () => {

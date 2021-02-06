@@ -22,11 +22,13 @@ const PurchaseButton = styled.div`
 
 export default function IdeaContainer({ id, title, detail, price }) {
   const authContext = useContext(AuthContext);
+  const { info } = authContext;
   const [buy, setBuy] = useState(false);
   const [ideaInfo, setIdeaInfo] = useState();
 
   const handlePurchase = () => {
-    if (price > authContext.point) {
+    // console.log(authContext);
+    if (price > info.basic.user_point) {
       alert("포인트가 모자랍니다.");
       return;
     }
@@ -47,18 +49,18 @@ export default function IdeaContainer({ id, title, detail, price }) {
 
       axios(config)
         .then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
           setBuy(true);
           setIdeaInfo(response.data.idea_info);
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
     }
   };
 
   if (buy && ideaInfo !== undefined) {
-    console.log(ideaInfo);
+    // console.log(ideaInfo);
     return (
       <Redirect
         to={{
