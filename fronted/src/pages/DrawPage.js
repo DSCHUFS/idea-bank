@@ -71,11 +71,12 @@ export default function DrawPage() {
   return (
     <DrawPageRoot>
       <Title>카테고리 선택</Title>
-      <FreePick>
+      {/* <FreePick>
         {info !== undefined && info.free > 0
           ? `무료뽑기 ${info.free}회 남음`
           : "뽑기 회당 100포인트 차감"}
-      </FreePick>
+      </FreePick> */}
+      <FreePick>뽑기 회당 100포인트 차감</FreePick>
       <Scroll>스크롤 하시면 됩니다 ➡</Scroll>
       <BackHome>
         <Button variant="contained">

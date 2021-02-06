@@ -3,6 +3,7 @@ import styled from "styled-components";
 import IdeaCard from "./IdeaCard";
 import axios from "axios";
 import { AuthContext } from "../api/contextAPI";
+import { Link } from "react-router-dom";
 
 const DrawCardRoot = styled.div`
   display: flex;
@@ -28,16 +29,21 @@ const DrawCardRoot = styled.div`
   }
 `;
 
+const RegisterLink = styled.div`
+  color: inherit;
+  transition: 0.3s;
+
+  &:hover {
+    color: red;
+    font-weight: bold;
+  }
+`;
+
 export default function DrawCard({ text, category, color, handleReducePoint }) {
+  const authContext = useContext(AuthContext);
+  const { info } = authContext;
   const [state, setState] = useState(false);
   const [idea, setIdea] = useState(null);
-  const authContext = useContext(AuthContext);
-
-  const handleOnClick = useCallback(() => {
-    setState(true);
-    getRandomIdea();
-    handleReducePoint();
-  }, []);
 
   const getRandomIdea = useCallback(() => {
     const config = {
@@ -58,6 +64,18 @@ export default function DrawCard({ text, category, color, handleReducePoint }) {
       });
   }, []);
 
+  const handleOnClick = useCallback(() => {
+    if (info.basic.user_point > 100) {
+      setState(true);
+      if (!state) {
+        getRandomIdea();
+        handleReducePoint();
+      }
+    } else {
+      alert("포인트가 모자랍니다");
+    }
+  }, [state, getRandomIdea, handleReducePoint]);
+
   return (
     <DrawCardRoot onClick={handleOnClick} color={state ? "#adffc3" : color}>
       {state ? (
@@ -69,7 +87,15 @@ export default function DrawCard({ text, category, color, handleReducePoint }) {
             author={idea.user_nickname}
             category={category}
           />
-        ) : null
+        ) : (
+          <div>
+            <div>더 이상 아이디어가 존재하지 않습니다</div>
+            <br />
+            <Link to="/register">
+              <RegisterLink>👉 아이디어 만들기!</RegisterLink>
+            </Link>
+          </div>
+        )
       ) : (
         text
       )}
