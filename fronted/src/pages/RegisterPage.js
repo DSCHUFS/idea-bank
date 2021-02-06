@@ -16,7 +16,7 @@ import axios from "axios";
 const RegisterPageRoot = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100vw;
   height: 100vh;
@@ -107,10 +107,13 @@ export default function RegisterPage() {
           <TextField
             inputRef={detailRef}
             id="outlined-textarea"
-            label="자세한 정보"
+            label="자세한 정보(300자 제한)"
             placeholder="ex) 아이디어 뱅크는..."
             multiline
             variant="outlined"
+            inputProps={{
+              maxLength: 299,
+            }}
           />
         </div>
         <br />
@@ -124,16 +127,6 @@ export default function RegisterPage() {
           />
         </div>
         <br />
-
-        {/* <div>
-          <TextField
-            inputRef={categoryRef}
-            id="outlined-textarea"
-            label="카테고리"
-            placeholder="ex) 해커톤 아이디어"
-            variant="outlined"
-          />
-        </div> */}
         <FormControl variant="outlined" style={{ width: "100%" }}>
           <InputLabel id="demo-simple-select-outlined-label">
             카테고리

@@ -19,8 +19,11 @@ const InvalidPassword = styled.div`
   color: red;
 `;
 
+const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
 export default function SignupPage() {
   const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isKorean, setIsKorean] = useState(false);
 
   const authContext = useContext(AuthContext);
 
@@ -54,10 +57,20 @@ export default function SignupPage() {
   };
 
   const handleOnChangePassword = (e) => {
+    if (korean.test(e.target.value)) {
+      setIsKorean(true);
+    } else {
+      setIsKorean(false);
+    }
     setIsValidPassword(confirmPasswordRef.current.value === e.target.value);
   };
 
   const handleOnChangeConfirmPassword = (e) => {
+    if (korean.test(e.target.value)) {
+      setIsKorean(true);
+    } else {
+      setIsKorean(false);
+    }
     setIsValidPassword(passwordRef.current.value === e.target.value);
   };
 
@@ -158,6 +171,15 @@ export default function SignupPage() {
         </div>
         <InvalidPassword>
           {isValidPassword ? null : "패스워드가 일치하지 않습니다."}
+        </InvalidPassword>
+        <InvalidPassword>
+          {isKorean ? (
+            <div>
+              패스워드에 한글이 포함되었습니다.
+              <br />
+              영문으로 입력해주세요.
+            </div>
+          ) : null}
         </InvalidPassword>
         <br />
         <div>
